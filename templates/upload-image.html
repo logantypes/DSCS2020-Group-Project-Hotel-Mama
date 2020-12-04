@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+  <body>
+
+    <form  method="post"  enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <br>
+      {{ form.image_upload.label }} {{ form.image_upload() }}
+      <br>
+      {{ form.submit_button() }}
+
+    </form>
+    </body>
+    </html>

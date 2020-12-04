@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+  <body>
+    <div class="container" style="min-height:100% width:80%">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+          {{message}}
+          </div>
+        {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  
+ <div class="container-fluid">
+  <h1 > Fridge Manager </h1>
+  <div class="card-deck">
+    <div class="card">
+      <img src="/static/image-recognition.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Image Recognition</h5>
+
+        <a href="/vision-api" class="btn btn-dark">Go</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="/static/manual.jpeg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Manual Entry</h5>
+
+        <a href="/fridge_manual" class="btn btn-dark">Go</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="/static/barcode.jpeg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Barcode</h5>
+
+        <a href="/barcode" class="btn btn-dark">Go</a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  {% endblock %}
+  </body>
+
+  </html>

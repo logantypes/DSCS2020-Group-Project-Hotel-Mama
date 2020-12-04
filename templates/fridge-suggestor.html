@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+  <body>
+
+		<div class="container" style="min-height:100% width:80%">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    {% for message in messages %}
+				  <div class="alert alert-warning alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					{{message}}
+				  </div>
+				{% endfor %}
+			  {% endif %}
+			{% endwith %}
+		</div>
+    <br>
+
+
+    <div class="container-fluid">
+    <form method="POST" enctype="multipart/form-data">
+      <button type="submit" class="btn btn-dark btn-lg btn-block" name='product'>Search with My Fridge</button>
+    </form>
+		<br>
+    <form method="POST">
+        <div class='col-xs-12 col-sm-12 col-md-10 col-lg-10'>
+            <div class='input-group'>
+                <input class='form-control' type='text' name='restaurant_name'
+                       placeholder='Enter ingredients separated by commas...'/>
+                <span class="input-group-btn">
+                  <button type='submit' class='btn btn-default'>
+                    <span class='glyphicon glyphicon-search'></span>
+                  </button>
+                </span>
+
+            </div>
+        </div>
+    </form>
+
+    <div class='col-xs-12 col-sm-12 col-md-10 col-lg-10'>
+    {% if response!=undefined and response|length > 0%}
+    <h2>Recipes using these ingredients</h2>
+    {% else %}
+    {% if response!="No recipes found"%}
+    <br>
+    <p>No recipes found</p>
+    {% else %}
+    <p></p>
+    {% endif %}
+    {% endif %}
+    </div>
+    <div class="card-columns">
+
+            {% for entry in response %}
+            <div class='card ' id="recipeSelectionComponent">
+              <div class="card-body">
+                <img class="card-img-top" id="recipeImage" src="{{entry['image']}}">
+                <br>
+               <p class="card-text"><a href= {{url_for("recipe", recipe_id=entry['id'] )}} class="btn btn-dark">{{entry['title'] }}</a></p>
+            </div>
+            </div>
+
+
+
+            {% endfor %}
+
+    </div>
+</div>
+
+	{% endblock %}
+	</body>
+</html>

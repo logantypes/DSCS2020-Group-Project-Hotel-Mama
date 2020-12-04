@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+
+	<body>
+
+<style>
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 90%;
+  height: 90%;
+}
+</style>
+
+<div class="container-fluid">
+  <div class="embed-responsive embed-responsive-4by3">
+<iframe class="embed-responsive-item" src="https://datastudio.google.com/embed/reporting/3d149210-8111-450c-b8d7-8a9a5c93d0ae/page/y9OrB" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+</div>
+
+{% endblock %}
+</body>
+
+</html>

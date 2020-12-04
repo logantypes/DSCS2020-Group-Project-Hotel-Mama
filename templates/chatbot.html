@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+
+	<body>
+
+		<div class="container" style="min-height:100% width:80%">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    {% for message in messages %}
+				  <div class="alert alert-warning alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					{{message}}
+				  </div>
+				{% endfor %}
+			  {% endif %}
+			{% endwith %}
+		</div>
+
+<div class="container-fluid">
+		<form method="POST">
+        <div class='col-xs-12 col-sm-12 col-md-10 col-lg-10'>
+            <div class='input-group'>
+                <input class='form-control' type='text' name='restaurant_name'
+                       placeholder="What's on your mind today ?"/>
+                <span class="input-group-btn">
+                  <button type='submit' class='btn btn-default'>
+                    <span class='glyphicon glyphicon-search'></span>
+                  </button>
+                </span>
+
+            </div>
+        </div>
+    </form>
+
+		<br>
+
+
+		<div class="alert alert-dark" role="alert">
+			{% for entry in list1 %}
+			<p class="mb-0" >{{entry}}</p>
+			<hr>
+
+			{% endfor %}
+		</div>
+
+
+
+
+		<div class="card-columns">
+      	{% for entry in response %}
+
+						<div class='card ' id="recipeSelectionComponent">
+              <div class="card-body">
+								<img class="card-img-top" id="recipeImage" src="{{entry['image']}}">
+
+							 <p class="card-text"><a href= {{url_for("recipe", recipe_id=entry['link'] )}} class="btn btn-dark">{{entry['title'] }}</a> </p>
+						</div>
+            	</div>
+			   {% endfor %}
+		</div>
+
+
+{% for entry in suggest%}
+<div class="alert-white" role="alert">
+  <h2 class="alert-heading">Suggestions based on entry: </h2>
+
+
+  <p class="mb-0" >{{entry['name']}}</p>
+  <hr>
+</div>
+  {% endfor %}
+  <br>
+		<div class="alert-white" role="alert">
+
+			  <h2 class="alert-heading">Main Functions: </h2>
+
+				<p class="mb-0" >Ask for recipes like 'chicken ' or 'spaghetti with shrimp'</p>
+				<hr>
+				<p class="mb-0" >Ask for nutrient contents like 'vitamin a in 2 carrots' or 'calories is 1 cup of butter'</p>
+				<hr>
+				<p class="mb-0" >Convert something with '2 cups of butter in grams'</p>
+				<hr>
+				<p class="mb-0" >Check out foodie gifts by saying 'show me some foodie gifts'</p>
+				<hr>
+				<p class="mb-0" >Find food substitutes by saying 'what is a substitute for flour'</p>
+				<hr>
+				<p class="mb-0" >Thirsty? Ask for wine pairings like 'which wine goes well with spaghetti carbonara'</p>
+				<hr>
+				<p class="mb-0" >For more similar results say 'more like the first/second/third...'</p>
+				<hr>
+				<p class="mb-0" >Let us tell you a joke, just say 'tell me a joke'.</p>
+				<hr>
+				<p class="mb-0" >Want to learn some food trivia, just say 'food trivia'.</p>
+
+
+
+				</div>
+
+
+    </div>
+
+	{% endblock %}
+	</body>
+
+</html>

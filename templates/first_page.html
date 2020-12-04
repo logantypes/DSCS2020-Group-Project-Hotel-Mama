@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+
+
+  <body>
+    <div class="container" style="min-height:100% width:80%">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    {% for message in messages %}
+				  <div class="alert alert-warning alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					{{message}}
+				  </div>
+				{% endfor %}
+			  {% endif %}
+			{% endwith %}
+		</div>
+    <div class="container-fluid">
+
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">Hotel Mama</h1>
+        <p class="lead font-weight-normal">Do not lose any more time thinking about what to cook or eat.</p>
+        <a class="btn btn-outline-secondary" href="/chatbot">Ask Hotel Mama</a>
+      </div>
+    </div>
+
+
+    <div class="position-relative overflow-hidden d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div class="my-3 py-3">
+          <h2 class="display-5">Already a lot of food in your fridge?</h2>
+          <p class="lead">Hotel Mama tells you what recipes you can cook with what you already have!</p>
+          <a class="btn btn-outline-secondary" href="/fridge-suggestor">Give me some master chef's ideas</a>
+        </div>
+        <img src="static/fridge.jpeg" class="bg-light shadow-sm mx-auto" style="width: 70%; height: 300px; border-radius: 21px 21px 0 0;">
+      </div>
+
+      <div class="position-relative overflow-hidden bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+          <h2 class="display-5">Make grocery shopping easier</h2>
+          <p class="lead">Create your grocery list by looking for recipes or by creating a custom one</p>
+          <a class="btn btn-outline-secondary text-dark btn-outline-dark" href="/my-profile">Start now</a>
+        </div>
+        <img src="static/shopping.jpg" alt="shopping" class="bg-light shadow-sm mx-auto" style="width: 70%; height: 300px; border-radius: 21px 21px 0 0;">
+      </div>
+    </div>
+
+    <div class="position-relative overflow-hidden d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 py-3">
+          <h2 class="display-5">Vary your week menu!</h2>
+          <p class="lead">We create a unique menu with individualised recipes!</p>
+          <a class="btn btn-outline-secondary text-dark btn-outline-dark" href="/menu-creator">Plan your menu for this week!</a>
+        </div>
+        <img src="static/weekmenu.jpg" class="bg-light shadow-sm mx-auto" style="width: 70%; height: 300px; border-radius: 21px 21px 0 0;">
+      </div>
+
+      <div class="position-relative overflow-hidden bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div class="my-3 p-3">
+          <h2 class="display-5">Passionate about cooking?</h2>
+          <p class="lead">Inspire your friends with your own recipes. Share your masterpieces</p>
+          <a class="btn btn-outline-secondary" href="/upload">Start now</a>
+        </div>
+        <img src="static/foodblog.jpg" class="bg-light shadow-sm mx-auto" style="width: 70%; height: 300px; border-radius: 21px 21px 0 0;">
+      </div>
+    </div>
+
+    </div>
+
+
+  {% endblock %}
+  </body>
+
+</html>

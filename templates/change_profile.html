@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+
+	<body>
+
+  <div class="container-fluid">
+  <h1> {{new_name}}</h1>
+  <form method="POST">
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <fieldset disabled>
+      <label for="disabledTextInput">Old Name</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="{{name}}">
+      </fieldset>
+    </div>
+    <div class="col-auto">
+      <label for="inputPassword4">New Name</label>
+      <input type="text" class="form-control" name="name"  id="exampleFormControlInput1">
+    </div>
+    <div class="col-auto">
+      <br>
+    <button type="submit" class="btn btn-dark">Change</button>
+    </div>
+  </div>
+  </form>
+  <br>
+  <br>
+  <form method="POST" >
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <fieldset disabled>
+      <label for="disabledTextInput">Old Email</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="{{email}}">
+      </fieldset>
+    </div>
+    <div class="col-auto">
+      <label for="inputPassword4">New Email</label>
+      <input type="text" class="form-control" name ="email" id="inputPassword4">
+    </div>
+    <div class="col-auto">
+      <br>
+    <button type="submit" class="btn btn-dark">Change</button>
+    </div>
+  </div>
+ </form>
+ <br>
+ <br>
+ <form method="POST" >
+ <div class="form-row align-items-center" >
+
+   <div class="col-auto">
+     <label for="inputPassword4">New Password</label>
+     <input type="password" class="form-control" name="password" id="inputPassword4">
+   </div>
+   <div class="col-auto">
+     <br>
+   <button type="submit" class="btn btn-dark">Change</button>
+   </div>
+ </div>
+</form>
+<br>
+<br>
+ <form method="POST" enctype="multipart/form-data">
+
+ 		<div class="input-group">
+ 			<div class="custom-file">
+ 				<input type="file" class="custom-file-input" id="customFileInput" name='input1' aria-describedby="customFileInput">
+ 				<label class="custom-file-label" for="customFileInput">Select File</label>
+ 			</div>
+ 			<div class="input-group-append">
+ 				<button class="btn btn-dark" type="submit" id="customFileInput">Change Profile Picture</button>
+ 			</div>
+ 		</div>
+
+ </form>
+ <script>
+ 	document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+ 		var name = document.getElementById("customFileInput").files[0].name;
+ 		var nextSibling = e.target.nextElementSibling
+ 		nextSibling.innerText = name
+ 	})
+ </script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endblock %}
+  	</body>
+
+  </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+  <body>
+    <div class="container" style="min-height:100% width:80%">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    {% for message in messages %}
+				  <div class="alert alert-warning alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					{{message}}
+				  </div>
+				{% endfor %}
+			  {% endif %}
+			{% endwith %}
+		</div>
+
+    <div class="container-fluid">
+
+
+    <div class="row row-cols-1 row-cols-md-2 text-center">
+      <div class="col mb-4" >
+        <div class="card-img" style="width: 75%">
+          <img src="static/mamma.jpg" class="card-img-top" alt="mamma" style="width: 80%; height: 300px">
+          <div class="card-body">
+            <h5 class="card-title">Hotel Mama</h5>
+            <p class="card-text">Do not loose anymore time for thinking about what to cook or eat.</p>
+            <a href="/chatbot" class="btn btn-primary">Ask Hotel Mama</a>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div class="card-img" style="width: 75%">
+          <img src="static/fridge.jpg" class="card-img-top" alt="fridge" style="width: 80%; height: 300px">
+      <div class="card-body">
+        <h5 class="card-title">Already a lot of food in your fridge?</h5>
+        <p class="card-text">Hotel Mama tells you what recipes you can cook with what you already have!</p>
+        <a href="/chatbot" class="btn btn-primary">Give me some master chef ideas</a>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-4">
+    <div class="card-img" style="width: 75%">
+      <img src="static/shopping.jpg" class="card-img-top" alt="mamma" style="width: 80%; height: 300px">
+      <div class="card-body">
+        <h5 class="card-title">Make grocery shopping easier</h5>
+        <p class="card-text">Create your own grocery list by looking for recipes or by creating your own.</p>
+        <a href="/chatbot" class="btn btn-primary">Start now</a>
+      </div>
+    </div>
+  </div>
+  <div class="col mb-4">
+    <div class="card-img" style="width: 75%">
+      <img src="static/planner.jpg" class="card-img-top" alt="mamma" style="width: 80%; height: 300px">
+      <div class="card-body">
+        <h5 class="card-title">Vary your week menu!</h5>
+        <p class="card-text">We create an unique menu with individualised recipes!</p>
+        <a href="/menu-creator" class="btn btn-primary">Plan your menu for this week</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    {% endblock %}
+  	</body>
+  </html>

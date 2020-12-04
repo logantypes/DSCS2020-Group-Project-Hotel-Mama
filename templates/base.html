@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hotel Mama</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  </head>
+
+      <body>
+
+        <div class="container-fullwidth">
+          {% if current_user.is_authenticated %}
+            <header class="navbar-dark navbar-expand-lg sticky-top" >
+                  <div class="container-fullwidth bg-dark">
+                    <nav class="navbar navbar-expand-lg navbar site-header py-3 ">
+                      <div class="container d-flex flex-column justify-content-between ">
+                    <a class="navbar-brand" href="/">
+                        <img src="/static/logo.png" width="60" height="60" alt="logo" >
+                        Hotel Mama
+                    </a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <div class="row justify-content-center">
+                        <ul class="navbar-nav justify-content-center mr-auto">
+                          <li class="nav-item">
+                            <a class="nav-link" href="/feed">Cooker's Book</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/upload">Upload Recipe</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/fridge-suggestor">Fridge Search</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/menu-creator">Create Menu</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/fridge_main">Fridge Manager</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/chatbot">Chatbot</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/my-profile">Profile</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </header>
+          <br>
+          {% else %}
+            <header class=" navbar-dark navbar-expand-lg" >
+                  <div class="container-fullwidth bg-dark">
+                    <nav class="navbar navbar-expand-lg navbar site-header py-3 ">
+                      <div class="container d-flex flex-column justify-content-between ">
+                    <a class="navbar-brand" href="/">
+                        <img src="/static/logo.png" width="60" height="60" alt="logo" >
+                        Hotel Mama
+                    </a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                          <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/register">Register</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
+                </div>
+            </header>
+          <br>
+
+        
+{% endif %}
+    </body>
+  </html>
+
+  {% block content %}
+
+  {% endblock %}

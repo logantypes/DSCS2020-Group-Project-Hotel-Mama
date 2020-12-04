@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+  <body>
+
+		<div class="container" style="min-height:100% width:80%">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    {% for message in messages %}
+				  <div class="alert alert-warning alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					{{message}}
+				  </div>
+				{% endfor %}
+			  {% endif %}
+			{% endwith %}
+		</div>
+<div class="container-fluid">
+<style>
+
+.nav-pills .nav-link.active
+
+{
+  background-color: #343a40;
+
+
+
+    }
+
+</style>
+
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills "   id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">My Profile</a>
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">My Grocery List</a>
+			<a class="nav-link active" id="v-pills-custom-tab" data-toggle="pill" href="#v-pills-custom" role="tab" aria-controls="v-pills-custom" aria-selected="true">Custom Grocery List</a>
+      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Menu</a>
+      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">My Fridge</a>
+      <a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" href="#v-pills-posts" role="tab" aria-controls="v-pills-posts" aria-selected="false">My Posts</a>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content"  id="v-pills-tabContent">
+
+
+<div class="tab-pane fade " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+<div class="container-fluid">
+
+	<h2 class="text-center"> User Profile </h2>
+
+
+	<!-- USER INFO -->
+
+  <center><img src={{url}} class="img-fluid img-thumbnail mx-auto d-block center" alt="Responsive image" style='border-radius: 50%'></center>
+  <form>
+  <fieldset disabled>
+    <div class="form-group">
+      <label for="disabledTextInput">Name</label>
+      <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ name }}">
+    </div>
+    <div class="form-group">
+      <label for="disabledTextInput">Email</label>
+      <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ email }}">
+    </div>
+
+  </fieldset>
+</form>
+<br>
+<form method="POST" enctype="multipart/form-data">
+  <button type="submit" class="btn btn-dark btn-lg btn-block" name='profile'>Change Profile</button>
+</form>
+
+
+	</div>
+
+</div>
+
+<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+
+<div class="container">
+  <h1>Grocery List</h1>
+
+  <div class="row">
+
+    {% for index, row in grocery_df.iterrows() %}
+		{% if row['user_id'] ==id  %}
+
+
+    <div class="card col-sm" style="width: 18rem;">
+      <div class="card-body">
+
+        <h5 class="card-title">{{ row['recipe_title'] }}</h5>
+        <p class="card-text">{{ row['grocery_list'] }}</p>
+				<a href= {{url_for("recipe", recipe_id=row['recipe_id'] )}} >Read full description</a>
+
+        <p class="card-text">User ID: {{ row['user_id'] }}</p>
+				<form method="POST">
+				<button type="submit" class="btn btn-light" name="recipe_id" value="{{ row['recipe_id'] }}">Delete</button>
+				</form>
+      </div>
+    </div>
+		{% endif %}
+
+    {% endfor %}
+
+  </div>
+	<br>
+	<button onclick="window.print()"  class="btn btn-dark" >Print/Save PDF</button>
+	<br>
+</div>
+</div>
+<div class="tab-pane fade show active" id="v-pills-custom" role="tabpanel" aria-labelledby="v-pills-profile-custom">
+	<h4> Your custom groceries list: </h4>
+	<form class="form-inline" method="POST">
+	  <div class="form-group mx-sm-3 mb-2">
+
+	    <input type="text" class="form-control" id="exampleInputEmail1"name="product" aria-describedby="emailHelp" placeholder="Product name">
+	  </div>
+	  <button type="submit" class="btn btn-dark mb-2">Add</button>
+	</form>
+	<table class="table">
+	  <thead>
+	    <tr>
+				<th scope="col"></th>
+	    <th scope="col">My Shopping List :</th>
+	   </tr>
+	 </thead>
+		 <tbody>
+			 {% for index, row in custom_df.iterrows() %}
+			 {% if row['user_id'] ==id  %}
+		 <tr>
+
+					<td> {{row['product']}}</td>
+						<td>
+						<form method="POST">
+						<button type="submit" class="btn btn-light" name="delete_custom" value="{{row['product']}}">Delete</button>
+						</form></td>
+
+				</tr>
+				{% endif %}
+
+				{% endfor %}
+			</tbody>
+		</table>
+
+
+		<br>
+		<button onclick="window.print()"  class="btn btn-dark" >Print/ Save PDF</button>
+		<br>
+
+</div>
+<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+
+<h1>Menu</h1>
+<table class="table-responsive ">
+  <thead>
+    <tr>
+			<th scope="col"></th>
+    <th scope="col">Monday</th>
+    <th scope="col">Tuesday</th>
+    <th scope="col">Wednesday</th>
+		<th scope="col">Thursday</th>
+		<th scope="col">Friday</th>
+		<th scope="col">Saturday</th>
+		<th scope="col">Sunday</th>
+
+
+   </tr>
+  </thead>
+    <tbody>
+    <tr>
+			<th scope="row">Breakfast</th>
+			{% for index, row in menu_df.iterrows() %}
+			{% if row['user_id'] ==id  %}
+		{% if  row['day'] == 'Breakfast'  %}
+
+
+	        	<td><a href= {{url_for("recipe", recipe_id=row['spoon_id'] )}} >{{ row['dish_title'] }}</a></td>
+
+
+
+{% endif %}
+{% endif %}
+{% endfor %}
+    </tr>
+		<tr>
+			<th scope="row">Lunch</th>
+			{% for index, row in menu_df.iterrows() %}
+			{% if row['user_id'] ==id  %}
+		{% if  row['day'] == 'Lunch'  %}
+
+
+						<td><a href= {{url_for("recipe", recipe_id=row['spoon_id'] )}} >{{ row['dish_title'] }}</a></td>
+
+
+
+{% endif %}
+{% endif %}
+{% endfor %}
+		</tr>
+		<tr>
+			<th scope="row">Dinner</th>
+			{% for index, row in menu_df.iterrows() %}
+			{% if row['user_id'] ==id  %}
+		{% if  row['day'] == 'Dinner'  %}
+
+
+						<td><a href= {{url_for("recipe", recipe_id=row['spoon_id'] )}} >{{ row['dish_title'] }}</a></td>
+
+
+
+{% endif %}
+{% endif %}
+{% endfor %}
+		</tr>
+
+
+
+    </tbody>
+
+	</table>
+
+	<br>
+	<button onclick="window.print()"  class="btn btn-dark" >Print this Menu/Save PDF</button>
+	<br>
+
+</div>
+
+<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+    <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-link active" id="nav-fridge-tab" data-toggle="tab" href="#nav-fridge" role="tab" aria-controls="nav-fridge" aria-selected="true">Fridge</a>
+
+  </div>
+</nav>
+ <div class="tab-pane fade show active" id="nav-fridge" role="tabpanel" aria-labelledby="nav-fridge-tab">
+     <style>
+      .X{
+          margin: auto;
+          padding: 1% 2%;
+          max-width: 1440px;
+          border-radius: 5px;
+          background: url(static/refrigerator.jpg) no-repeat;
+          background-position: center;
+          background-size:cover;
+          box-shadow: 0 2px 6px 0 rgba(0,0,0, .3);
+        }
+        .SG{
+              margin: 0;
+              padding: 0;
+              text-align: center;
+            }
+            .SG .sgLi{
+          min-width: 24%;
+          margin: 2% .35%;
+          display: inline-flex;
+          box-shadow: 0 2px 4px rgba(0,0,0, .2);
+        }
+        .SG .sgLi:hover{
+          box-shadow:0 5px 10px rgba(0,0,0,.15);}
+        .SG .box{
+          width: 100%;
+          height: 100vh;
+          padding: 1% 2%;
+          background: white;
+          min-height: 200px;
+          box-sizing: border-box;
+            }
+            /*Styles */
+            .df{list-style-type: disc;}
+            .s1{list-style-type: square;}
+            .s2{list-style-type: circle;}
+            .s3{list-style-type: decimal;}
+            .s4{list-style-type: decimal-leading-zero;}
+            .s5{list-style-type: lower-alpha;}
+            .s6{list-style-type: upper-alpha;}
+            .s7{list-style-type: lower-roman;}
+            .s8{list-style-type: upper-roman;}
+            .s9{list-style-type: lower-greek;}
+            .s10{list-style-type: georgian;}
+            .s11{list-style-type: hebrew;}
+            .s12{list-style-type: hiragana;}
+            .s13{list-style-type: hiragana-iroha;}
+            .s14{list-style-type: katakana;}
+            .s15{list-style-type: katakana-iroha;}
+            .s16{list-style-type: cjk-ideographic;}
+            .s17{list-style-image: url(//goo.gl/L3tqpe);}
+            .s18{list-style: none;}
+            .s18 li:before{
+              content: '';
+              width: 20px;
+              height: 20px;
+              margin-right: 15px;
+              display: inline-block;
+              background: url(//goo.gl/lcPSVD);
+              background-position: 50%;
+            }
+            .s19{list-style: none;}
+            .s19 li:before{
+              content: '\f0a9';
+              margin-right: 15px;
+              font-family: FontAwesome;
+            }
+
+     </style>
+
+    <div class="X">
+
+
+        <ul class="SG">
+          <li class="sgLi">
+            <div class="box">
+           <h3>Here's what's in your Fridge</h3>
+           <ul class="s2">
+             {% for index, row in fridge_df.iterrows() %}
+             {% if row['user_id'] ==id  %}
+            <li>{{row['product']}}</li>
+
+            {% endif %}
+
+            {% endfor %}
+           </ul>
+          </div>
+         </li>
+
+    </div>
+
+ </div>
+
+
+
+
+<script>
+  document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+      var name = document.getElementById("customFileInput").files[0].name;
+      var nextSibling = e.target.nextElementSibling
+      nextSibling.innerText = name
+  })
+</script>
+<br>
+<div class="d-flex justify-content-center">
+<h4 >{{texts}}</h4>
+<br>
+</div>
+<div class="d-flex justify-content-center">
+<img id="recipeImage" src="{{type}}">
+</div>
+{{decoded_objects}}
+</div>
+<div class="tab-pane fade" id="v-pills-posts" role="tabpanel" aria-labelledby="v-pills-posts-tab">
+  <div class="container">
+    {% for user in users_df %}
+    {% if user.id == current_user.id %}
+
+    <h1>Chapter of {{ user.name }} </h1>
+
+    {% endif %}
+    {% endfor %}
+
+    <div class="card-columns">
+
+      {% for index, row in products_df.iterrows() %}
+
+
+      <div class='card '>
+        <div class="card-body">
+          <img class="card-img-top" src={{ row['img_public_url'] }} alt="Card image cap">
+          <h5 class="card-title">{{ row['name'] }}</h5>
+          <p class="card-text">{{ row['description'] }}</p>
+          <p class="card-text">{{ row['price'] }} Min.</p>
+          {% for user in users_df %}
+          {% if user.id == row['user_id'] %}
+          <img src={{user.img_public_url}} class="img-fluid img-thumbnail mx-auto d-block center" alt="Responsive image" style='border-radius: 50%'>
+          <p class="card-text"><a href="{{url_for('feed3', user_id=row['user_id'])}}">{{ user.name}}</a></p>
+          {% endif %}
+          {% endfor %}
+
+          {% for products in products_all %}
+          {% if products.id == row['id'] %}
+          <p class="card-text"><a href="{{url_for('feed2', tag=row['tag'])}}">@{{ row['tag'] }}</a></p>
+          {% if current_user.has_liked_products(products) %}
+            <p class="card-text"><a href="{{ url_for('like_action', products_id=products.id, action='unlike') }}"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg> </a></p>
+          {% else %}
+            <p class="card-text"><a href="{{ url_for('like_action', products_id=products.id, action='like') }}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+            </svg></a></p>
+          {% endif %}
+          <p class="card-text">{{ products.likes.count() }} likes</p>
+          {% endif %}
+          {% endfor %}
+          <form method="POST">
+          <button type="submit" class="btn btn-light" name="delete_post" value="{{row['id']}}">Delete</button>
+          </form>
+
+        </div>
+      </div>
+
+      {% endfor %}
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}
+</body>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Hotel Mama</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href={{ url_for("static", filename="styles.css") }}>
+
+  </head>
+  {% extends "base.html" %}
+  {% block content %}
+  <body>
+      <div class = "page-header"  class="display-1">
+      <h1 class="text-lg-center" > Login</h1>
+    </div>
+
+		<div class="container" style="min-height:100% width:80%">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    {% for message in messages %}
+				  <div class="alert alert-warning alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					{{message}}
+				  </div>
+				{% endfor %}
+			  {% endif %}
+			{% endwith %}
+		</div>
+
+    <br>
+    <br>
+
+		<div class="container-fluid">
+
+			<form  method="post">
+			  {{ form.hidden_tag() }}
+
+              <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" placeholder="Enter your Email"
+              {{ form.email() }}
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control" placeholder="Enter your Password"
+              {{ form.password() }}
+              </div>
+              <br><br></br>
+
+              <button class="btn btn-dark" "{ form.submit_button() }}"> Submit </button>
+
+
+			</form>
+            <br></br>
+            <h6> Do you not have an account yet? Register <a href="/register">here</a>! </h6>
+
+		</div>
+{% endblock %}
+</body>
