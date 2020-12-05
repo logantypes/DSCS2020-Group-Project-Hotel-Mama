@@ -198,6 +198,7 @@ Final notes:
 
 populate_database.py could be used to populate the recipes section of the website with Spoonacular Recipes
 db_startup.py is particulary useful when you change the classes or parameters of classes in SQL database to instantiate the database . Sometimes the dependency error appears, but this can be solved with the second part of that file that deletes the old structure in a CASCADE manner.
+get-pip.py installs pip on your device if this is necessary
 
 ## Major Challenges
 Our biggest challenge was to integrate all functionalities in the same App. In the beginning, we worked with few categories for the SQL Database. By adding functionalities, such as saving the weekly menu or scanning the barcode, we needed to modify our classes in the SQL Database. This constant implied that we had to restart the SQL Databaase every time.

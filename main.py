@@ -9,7 +9,7 @@ import random
 from google.cloud import language_v1
 from google.cloud import vision
 from google.cloud import automl_v1beta1
-from pil import Image
+
 import sys
 import pandas as pd
 import string
@@ -32,17 +32,28 @@ from flask_login import logout_user, login_required
 import uuid
 from flask_bootstrap import Bootstrap
 from forms import RegistrationForm, LoginForm
-
+from io import BytesIO
 # this file is missing because it is included in the gitignore. You have to
 # create your own and fill it with the following variables
 from secrets import SQL_PASSWORD, SQL_PUBLIC_IP, SQL_DATABASE_NAME, FOODREPO_KEY , SPOON_KEY ,PROJECT_ID,MODEL_ID, BUCKET_NAME ,SECRET_KEY
 import spoonacular as sp
+import torch
+import torchvision
+import torchvision.transforms as transforms
+from torchvision import models
+import torchvision
+from PIL import Image
+import torchvision.transforms as transforms
+import torchvision.utils as vutils
+from torch.utils.data import DataLoader
+import torch.nn.init as init
 api = sp.API(SPOON_KEY)
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./gcp_credentials/astral-charter-294311-a6531ff12b3e.json"
 API_KEY = SPOON_KEY
 
 app = Flask(__name__)
+Custom_Model=True
 
 ###############################################################################
 # GOOGLE CLOUD SETTINGS
@@ -892,6 +903,8 @@ def detect_labels_uri(uri):
     client = vision.ImageAnnotatorClient()
     image = vision.Image()
     image.source.image_uri = uri
+    
+    
 
     response = client.label_detection(image=image)
     labels = response.label_annotations
@@ -958,43 +971,93 @@ def save_pic(img):
     return public_url
 
 def automl(uri):
-    project_id = PROJECT_ID
-    model_id = MODEL_ID
-    prediction_client = automl_v1beta1.PredictionServiceClient()
-
-
-    # Get the full path of the model.
-    model_full_id = automl_v1beta1.AutoMlClient.model_path(
-        project_id, "us-central1", model_id
-    )
-    '''
-    urllib.request.urlretrieve(uri, "sample.png")
-
-    with open(uri, "rb") as content_file:
-        content = content_file.read()'''
-
-    response = requests.get(uri)
-    content=response.content
-    image = automl_v1beta1.Image()
-
-    image = automl_v1beta1.Image(image_bytes=content)
-
-
-
-    payload = automl_v1beta1.ExamplePayload(image=image)
-
-
-    request = automl_v1beta1.PredictRequest(
-        name=model_full_id,
-        payload=payload
-    )
-
-    response = prediction_client.predict(request=request)
-    for result in response.payload:
-
-        return result.display_name
-
-
+    if Custom_Model==False:
+        project_id = PROJECT_ID
+        model_id = MODEL_ID
+        prediction_client = automl_v1beta1.PredictionServiceClient()
+    
+    
+        # Get the full path of the model.
+        model_full_id = automl_v1beta1.AutoMlClient.model_path(
+            project_id, "us-central1", model_id
+        )
+        '''
+        urllib.request.urlretrieve(uri, "sample.png")
+    
+        with open(uri, "rb") as content_file:
+            content = content_file.read()'''
+    
+        response = requests.get(uri)
+        content=response.content
+        image = automl_v1beta1.Image()
+    
+        image = automl_v1beta1.Image(image_bytes=content)
+    
+    
+    
+        payload = automl_v1beta1.ExamplePayload(image=image)
+    
+    
+        request = automl_v1beta1.PredictRequest(
+            name=model_full_id,
+            payload=payload
+        )
+    
+        response = prediction_client.predict(request=request)
+        for result in response.payload:
+    
+            return result.display_name
+    elif Custom_Model==True:
+        response = requests.get(uri)
+        mnist_test_set = Image.open(BytesIO(response.content))
+        net = models.wide_resnet50_2(pretrained=True)
+        test_transform=transforms.Compose([
+                                        transforms.Resize(256),
+                transforms.CenterCrop(224),
+                transforms.ToTensor(),]
+                                      )
+        #mnist_test_set = Image.open(img)
+          
+            
+        classes = ( 'Bread',
+        
+        'Dairy product',
+        
+        'Dessert',
+        
+        'Egg',
+        
+        'Fried food',
+        
+        'Meat',
+        
+        'Noodles-Pasta',
+        
+        'Rice',
+        
+        'Seafood',
+        
+        'Soup'
+        
+        'Vegetable-Fruit'  )
+        
+        
+        val_loader= test_transform(mnist_test_set )
+        
+        
+        checkpoint = torch.load("best_mnist_checkpoint.pt")
+        net.load_state_dict(checkpoint['state_dict'])
+        
+        outputs = net(val_loader[None, ...])
+        _, predicted = torch.max(outputs, 1)
+        
+        print('Predicted: ', ' '.join('%5s' % classes[predicted[j]]
+                                      for j in range(1)))
+        prediction=' '.join('%5s' % classes[predicted[j]]
+                                      for j in range(1))
+        print(prediction)
+        prediction=str(prediction)
+        return prediction
 
 
 def add_product(title, time, recipe, img):
