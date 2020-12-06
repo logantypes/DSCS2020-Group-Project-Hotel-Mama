@@ -91,7 +91,7 @@ Hotel Mama is a revolutionizing flask application that helps you to:
 * Also, you can track, delete, and like your posts via your profile
 ![alt text](https://github.com/logantypes/DSCS2020-Group-Project/blob/main/README_pictures/MyPosts_Profile.PNG?raw=true)
 #### Data Analytics
-* We also added parameters such as NLP analysis of recipes posted by users to collected data such as sentiment, magnitude , likes etc.
+* We also added parameters such as NLP analysis of recipes posted by users to collected data such as language, sentiment, magnitude, likes etc.
 ![alt text](https://github.com/logantypes/DSCS2020-Group-Project-Hotel-Mama/blob/main/README_pictures/Analytics.PNG?raw=true)
 
 Furthermore, Hotel Mama gives you insights into the most frequently cooked recipes, popular foods, and much more. It helps you get a better understanding of what is trending at the moment. For access to the Hotel Mamma application, users need to register. The functionalities are available only for members of the Hotel Mama community.
