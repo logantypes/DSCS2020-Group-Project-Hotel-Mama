@@ -16,7 +16,7 @@ Hotel Mama is a revolutionizing flask application that helps you to:
 * Managing the food you have in your fridge
 * Create your individualized weekly Menu
 
-![alt text](https://github.com/logantypes/DSCS2020-Group-Project/blob/main/README_pictures/Overview.png?raw=true)
+![alt text](https://github.com/logantypes/DSCS2020-Group-Project-Hotel-Mama/blob/main/README_pictures/Overview.png)
 
 #### Homepage
 * The Homepage allows you to reach all functionalities of our website using the navigation bar
@@ -100,11 +100,11 @@ We encourage you to use it for educational purposes.
 
 #### Backend & Application
 Here you can see the programs used in the backend and the resulting functionalities of the Hotel Mama.
-![alt text](https://github.com/logantypes/DSCS2020-Group-Project/blob/main/README_pictures/Backend.png?raw=true)
+![alt text](https://github.com/logantypes/DSCS2020-Group-Project-Hotel-Mama/blob/main/README_pictures/Backend.png)
 
 #### Frontend
 To construct an appealing frontend that functions on any device, we used these programs.
-![alt text](https://github.com/logantypes/DSCS2020-Group-Project/blob/main/README_pictures/Frontend.png?raw=true)
+![alt text](https://github.com/logantypes/DSCS2020-Group-Project-Hotel-Mama/blob/main/README_pictures/Frontend.png)
 
 #### Technical Features
 Here you can find a more technical description of the Hotel Mama's features.
