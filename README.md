@@ -155,8 +155,8 @@ It also provides useful functions that we could use to help with routing, errors
 * [SQL](https://www.sqlalchemy.org/): The databases containing all data saved in the classes Users, Products, Product-Likes, Food, Menu, Custom and Fridge with their respective attributes. *(SQLAlchemy)*
 
 * [CSS](https://www.w3.org/Style/CSS/current-work.en.html), [HTML](https://www.w3.org/TR/html52/) and [Bootstrap](https://getbootstrap.com/) were also used for the frontend. Bootstrap was configured to be responsive on all devices, including phones, tablets, laptops and pc .
-* [Pytorch](https://pytorch.org/get-started/locally/) Pytorch library is needed for a custom model for training as well as for starting the app with custom machine learning model. For training your own set of tags , you can use Model.ipynb . The CUDA package is required such datasets as food11 or food101 . The custom model was trained with Wideresnet-18 framework due to high learning capabilities as well as adequate use of CUDA memory , however other models as well as data augumentations are possible. 
-
+* [Pytorch](https://pytorch.org/get-started/locally/) Pytorch library is needed for a custom model for training as well as for starting the app with custom machine learning model. For training your own set of tags , you can use Model.ipynb . The CUDA package is required for training of datasets such as food11 or food101 . The custom model was trained with Wideresnet-18 framework due to high learning capabilities as well as adequate use of CUDA memory , however other models as well as data augumentations are possible. 
+Google Colab Pro is advised for model training.
 
 
 ## Installation
