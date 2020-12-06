@@ -155,6 +155,9 @@ It also provides useful functions that we could use to help with routing, errors
 * [SQL](https://www.sqlalchemy.org/): The databases containing all data saved in the classes Users, Products, Product-Likes, Food, Menu, Custom and Fridge with their respective attributes. *(SQLAlchemy)*
 
 * [CSS](https://www.w3.org/Style/CSS/current-work.en.html), [HTML](https://www.w3.org/TR/html52/) and [Bootstrap](https://getbootstrap.com/) were also used for the frontend. Bootstrap was configured to be responsive on all devices, including phones, tablets, laptops and pc .
+* [Pytorch](https://pytorch.org/get-started/locally/) Pytorch library is needed for a custom model for training as well as for starting the app with custom machine learning model. For training your own set of tags , you can use Model.ipynb . The CUDA package is required such datasets as food11 or food101 . The custom model was trained with Wideresnet-18 framework due to high learning capabilities as well as adequate use of CUDA memory , however other models as well as data augumentations are possible. 
+
+
 
 ## Installation
 
@@ -172,7 +175,7 @@ For creating the database, you should register on Google Cloud and create a new 
 
 Additionally, you should register on Spoonacular and get your API_KEY and do the same for the FOODREPO API . (As mentioned Foodrepo works primarily with Swiss food products).
 
-Furthermore, you have to train a machine learning model for tagging classification by picture . During our project we used food 11 dataset [Webpage](https://www.kaggle.com/trolukovich/food11-image-dataset) , however there is also a possibility to use food 101 dataset. Both of them are publicly accessible via Kaggle . We chose to use food 11 dataset due to economical and time constraint reasons of training the model on Google AutoMl .However , the training could also be performed on your own model with other datasets.
+Furthermore, you have to train a machine learning model for tagging classification by picture  or use a custom version provided by us with accuracy of 65 % on food11 dataset. During our project we used food 11 dataset [Webpage](https://www.kaggle.com/trolukovich/food11-image-dataset) , however there is also a possibility to use food 101 dataset. Both of them are publicly accessible via Kaggle . We chose to use food 11 dataset due to economical and time constraint reasons of training the model on Google AutoMl as well as creating a custom model (Model.ipynb) .However , the training could also be performed on your own model with other datasets. To choose between the custom model provided by us or AutoML model , change Custom_Model boolean to True or False at the beginning of main.py . The best checkpoint can be downloaded from a link in link_for_best_checkpoint_custom_model.txt . The checkpoint should be located in the main folder. Due to maximum file size allowance we can't provide checkpoint directly with the whole repository.
 
 Create your secrets.py file:
 
