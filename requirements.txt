@@ -42,4 +42,4 @@ oauth2client==2.2.0
 beautifulsoup4==4.9.3
 simplejson==3.17.2
 numpy==1.19.2
-urllib3==1.24.3
+urllib3==1.26.5
