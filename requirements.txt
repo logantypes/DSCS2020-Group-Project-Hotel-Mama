@@ -27,7 +27,7 @@ Werkzeug==1.0.1
 Flask_SQLAlchemy == 2.4.4
 google_api_core == 1.23.0
 # DSCS2020-Group-Project/get-pip.py: 82,83,84
-pip == 20.3
+pip == 21.1
 # DSCS2020-Group-Project/get-pip.py: 120
 setuptools == 49.2.1
 WTForms==2.3.3
