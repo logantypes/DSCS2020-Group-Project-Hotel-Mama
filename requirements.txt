@@ -29,7 +29,7 @@ google_api_core == 1.23.0
 # DSCS2020-Group-Project/get-pip.py: 82,83,84
 pip == 20.3
 # DSCS2020-Group-Project/get-pip.py: 120
-setuptools == 49.2.1
+setuptools == 65.5.1
 WTForms==2.3.3
 spoonacular==3.0
 SQLAlchemy==1.3.20
